@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using WebDriverManager.DriverConfigs.Impl;
 
 namespace Selenium_Udemy
@@ -7,7 +9,7 @@ namespace Selenium_Udemy
     public class Tests
     {
         IWebDriver driver;
-        string url = "https://rahulshettyacademy.com/loginpagePractise";
+        String url = "https://rahulshettyacademy.com/loginpagePractise";
 
        
         [SetUp]
@@ -20,9 +22,32 @@ namespace Selenium_Udemy
         }
 
         [Test]
-        public void Test1()
+        public void LoggingInWithIncorrectPassword()
         {
-            Assert.Pass();
+            driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
+            driver.FindElement(By.Id("password")).SendKeys("learning2");
+            driver.FindElement(By.Id("terms")).Click(); //bug found here - logging in is possible without accepting terms
+            driver.FindElement(By.Id("signInBtn")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.TextToBePresentInElementValue(By.Id("signInBtn"), "Sign In"));
+            String errorMessage = driver.FindElement(By.CssSelector(".alert.alert-danger.col-md-12")).Text;
+            Assert.That(errorMessage, Is.EqualTo("Incorrect username/password."));
+        }
+
+        [Test]
+        public void LoggingInWithProperCredentialsAsUser()
+        {
+            driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
+            driver.FindElement(By.Id("password")).SendKeys("learning");
+            driver.FindElement(By.CssSelector("input[value = 'user']")).Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("okayBtn")));
+            driver.FindElement(By.Id("okayBtn")).Click();
+            driver.FindElement(By.Id("terms")).Click();
+            driver.FindElement(By.Id("signInBtn")).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(".nav-item.active")));
+            String currentURL = driver.Url;
+            Assert.That(driver.Url, Is.EqualTo("https://rahulshettyacademy.com/angularpractice/shop"));
         }
 
         [TearDown]
