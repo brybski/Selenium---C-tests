@@ -22,7 +22,7 @@ namespace Selenium_Udemy
         }
 
         [Test]
-        public void LoggingInWithIncorrectPassword()
+        public void FailedLoggingInWithIncorrectPassword()
         {
             //add wrong logging in data
             driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
