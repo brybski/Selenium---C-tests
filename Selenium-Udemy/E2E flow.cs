@@ -15,7 +15,7 @@ namespace Selenium_Udemy
         [SetUp]
         public void OpeningBrowser()
         {
-            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig()); //WebDriverManager package that helps implementing proper chromedriver for currently installed browser version
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(url);
@@ -29,7 +29,7 @@ namespace Selenium_Udemy
             driver.FindElement(By.Id("terms")).Click(); //bug found here - logging in is possible without accepting terms
             driver.FindElement(By.Id("signInBtn")).Click();
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.TextToBePresentInElementValue(By.Id("signInBtn"), "Sign In"));
+            wait.Until(ExpectedConditions.TextToBePresentInElementValue(By.Id("signInBtn"), "Sign In")); //wait instruction for response if login is done successfully or not
             String errorMessage = driver.FindElement(By.CssSelector(".alert.alert-danger.col-md-12")).Text;
             Assert.That(errorMessage, Is.EqualTo("Incorrect username/password."));
         }
@@ -46,7 +46,6 @@ namespace Selenium_Udemy
             driver.FindElement(By.Id("terms")).Click();
             driver.FindElement(By.Id("signInBtn")).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(".nav-item.active")));
-            String currentURL = driver.Url;
             Assert.That(driver.Url, Is.EqualTo("https://rahulshettyacademy.com/angularpractice/shop"));
         }
 
