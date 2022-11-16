@@ -14,20 +14,20 @@ namespace Selenium_Udemy
 {
     /*
             Basic XPath syntax:
-            //tag[@attribute='value']
+    //tag[@attribute='value']
 
-            practice on https://practicetestautomation.com/practice-test-exceptions/
+    practice on https://practicetestautomation.com/practice-test-exceptions/
 
-            edit button XPath:
-            //button[@id="edit_btn"]
+    edit button XPath:
+    //button[@id="edit_btn"]
 
-            second input row:
-            //div[@id="row2"]/input
+    second input row:
+    //div[@id="row2"]/input
 
             */
 
     /*
-    / vs // vs ./ vs .// section
+            / vs // vs ./ vs .// section
 
     / is used at the beginning of absolute location path, short for child node and it selects a root element
     // is used at the beginning of relative location path, short for descendant or self node, selects element anywhere on a page
@@ -48,8 +48,29 @@ namespace Selenium_Udemy
     row.FindElement(By.XPath(".//label")).Text;
     we are telling Selenium that we want to get label tag from row IWebElement only, not from the whole page
 
-    excercise below
+    excercise in XPathExcercise method below
     */
+
+    /*
+            Position and index in XPath
+    NOTE! Indexes in XPath starts with 1, not 0.
+    example: //h5[2] - second element with tag h5
+    //h5[3] == //h5 [position()=3]
+    with position we can use not only = sign, but also:
+    != not equal to
+    <, >    less/more than
+    <=, >=  less/more than or equal to
+
+    //h5[last()] - last element with h5 tag
+    //h5[last()-1] - one element before last with h5 tag
+
+    finding element with attribute and index:
+    (//div[@class='row'])[2] - second element with class = row
+    (//div[@class='row'])[2]/button[3] - third button having parent that is second element with class = row
+    
+
+
+            */
 
 
     internal class XPath_training
