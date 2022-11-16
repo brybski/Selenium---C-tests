@@ -48,7 +48,20 @@ namespace Selenium_Udemy
             // is used at the beginning of relative location path, short for descendant or self node, selects element anywhere on a page
 
             example for relative XPath for row 1 text field:
-            //div[@id='rows']/div/div/input
+            //div[@id='rows']/div/div/input == //div[@id='rows']//input - the second syntax mean search input tag in any of descendant of div with attribute = rows
+
+            .//input or ./input - relative location path, starting at the context node; example:
+            we are having list of IWebElements:
+            IList<IWebElement> rows = driver.FindElement(By.XPath("//div[@class='row']"));
+            
+            and now we are iterating through this list
+            foreach (IWebElement row in rows) {
+            row.FindElement(By.XPath("//label")).Text;
+            }
+            having only // in XPath we're missing information that we are referring to row element and looking for label in every place of the html code;
+            when used:
+            row.FindElement(By.XPath(".//label")).Text;
+            we are telling Selenium that we want to get label tag from row IWebElement only, not from the whole page
 
             */
         }
