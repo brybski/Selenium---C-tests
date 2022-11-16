@@ -24,6 +24,36 @@ namespace Selenium_Udemy
             driver.Navigate().GoToUrl(url);
         }
 
+        [Test]
+        public void XPathExcercise()
+        {
+            /*
+            Basic XPath syntax:
+            //tag[@attribute='value']
+
+            practice on https://practicetestautomation.com/practice-test-exceptions/
+
+            edit button XPath:
+            //button[@id="edit_btn"]
+
+            second input row:
+            //div[@id="row2"]/input
+
+            */
+
+            /*
+            / vs // vs ./ vs .// section
+
+            / is used at the beginning of absolute location path, short for child node and it selects a root element
+            // is used at the beginning of relative location path, short for descendant or self node, selects element anywhere on a page
+
+            example for relative XPath for row 1 text field:
+            //div[@id='rows']/div/div/input
+
+            */
+        }
+
+
         [TearDown]
         public void QuitBrowser()
         {
