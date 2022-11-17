@@ -70,6 +70,33 @@ namespace Selenium_Udemy
 
             */
 
+    /*
+            XPath functions - text
+
+    sometimes we can only locate element by text function - remember to add all text to this type of search
+    //h5[text()='Create list of your favorite foods']
+    //a[text()='Selenium WebDriver with Java for beginners program']
+
+            XPath functions - contains
+    //tag[contains(@attribute,'partial value')]
+    //button[contains(@id,'login')] - find all elements in button tag, that has id attribute containing login
+    //button[contains(@id,'_btn')]
+    we can also use contains with text function:
+    //tag[contains(text(),'partial value')]
+    //p[contains(text(),'This page is created')]
+
+            XPath functions - starts with
+    //tag[starts-with(@attribute,'beginning')]
+
+            XPath functions - not
+    //tag[not(@attribute='value')]
+    //tag[not(text()='value')]
+    //tag[not(contains(@attribute,'partial value'))]
+    //h5[not(contains(text(),'list of your favorite'))]
+
+
+           */
+
 
     internal class XPath_training
     {
