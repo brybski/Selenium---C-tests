@@ -67,8 +67,6 @@ namespace Selenium_Udemy
     finding element with attribute and index:
     (//div[@class='row'])[2] - second element with class = row
     (//div[@class='row'])[2]/button[3] - third button having parent that is second element with class = row
-    
-
 
             */
 
