@@ -98,6 +98,20 @@ namespace Selenium_Udemy
            */
 
 
+    /*
+            XPath ADVANCED - operators
+    //button[@name='Add' or @name='Remove']
+    //button[@class and @name='Save']
+
+    //button[@class='btn' and not(@style='display: none;')] == //button[@class='btn'] [not(@style='display: none;')]
+
+            Wildcards
+    * replace any element: //*[@*='value']
+    //button[@*='btn'] - searching any element in tag button that has attribute = 'btn'
+
+    */
+
+
     internal class XPath_training
     {
         IWebDriver driver;
