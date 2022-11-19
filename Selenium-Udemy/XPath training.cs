@@ -107,8 +107,42 @@ namespace Selenium_Udemy
 
             Wildcards
     * replace any element: //*[@*='value']
-    //button[@*='btn'] - searching any element in tag button that has attribute = 'btn'
+    //button[@*='btn'] - searching any element in tag button that has any attribute = 'btn'
 
+
+            XPath Axes
+    basic formula: axisname::nodetest[predicate]
+
+    //div[@id='row1']/parent::div - searching element with 'row1' id below div tag, then searching div parent for that node; div can be replaced by *
+    excercise - find second point of test case 2;
+    //h5[contains(text(),'Test case 2')]/following-sibling::ol[1]/li[2] - searching element in h5 tag that contains 'Test case 2', then find first following sibling and then second child of it with li tag
+    
+    excercise - find test case where one of the step is Verify text saved;
+    //li[contains(text(),'Verify text saved')]/parent::ol/preceding-sibling::h5[1] - searching element that contains text, then go to ol parent, then to preceding sibling number 1 that is h5 type
+
+
+            Finding elements relative to other elements [usually there are better ways to find proper selector]
+
+    excercise - looking for div tag that has a child with tag input
+    //div[./input] == input/parent::div
+
+    excercise - find input which is child of div
+    //div/input == //div/child::input == input[parent::div]
+    in the last case we can use predicates as shown: //input[parent::div[@id='row2']]
+
+
+            Selecting several paths
+    //div[@class='row']|//input[@id='text']
+    | means OR - we are looking through 2 conditions, if any is met then result is shown
+
+
+            SVG elements
+    in this case we always need to use wildcard * and name() function
+    //*[name()='rect' and @y='11'] == //*[@y='11'] because //rect[@y='11'] will not work
+    //*[name()='symbol' and @id='icon-amazon']/*[name()='path']
+
+            Stopping page load
+    In dev tool go to sources, then Event Listener Breakpoints at the bottom, then mouse -> Click; in this case any step that comes after mouse click will be debugged
     */
 
 
