@@ -66,27 +66,39 @@ namespace Selenium_Udemy
         [Test]
         public void ActionsClassHover()
         {
+            //hovering over button using Actions class, remember to add Perform for methods of that class!
             Actions a = new Actions(driver);
             IWebElement hover = driver.FindElement(By.XPath("//button[contains(text(),'Hover')]"));
             a.MoveToElement(hover).Perform();
+
+            //select Top from the list
             IWebElement Top = driver.FindElement(By.XPath("//div/a[contains(text(),'Top')]"));
             a.MoveToElement(Top).Click().Perform();
 
+            //assertion
             Assert.That(driver.Url, Is.EqualTo("https://rahulshettyacademy.com/AutomationPractice/#top"));
+
+            //drag and drop, double click, right click (Context Click) are also available as methods from that class
         }
 
         [Test]
-        public void ActionsClassDragAndDrop()
+        public void Frames()
         {
-            Actions a = new Actions(driver);
-            IWebElement hover = driver.FindElement(By.XPath("//button[contains(text(),'Hover')]"));
-            a.MoveToElement(hover).Perform();
-            IWebElement Top = driver.FindElement(By.XPath("//div/a[contains(text(),'Top')]"));
-            a.MoveToElement(Top).Click().Perform();
+            //scrolling down to iframe
+            IWebElement frameScroll = driver.FindElement(By.Id("courses-iframe"));
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].scrollIntoView(true)", frameScroll);
+            
+            //switch to iframe and then click all access plan link
+            driver.SwitchTo().Frame("courses-iframe");
+            driver.FindElement(By.LinkText("All Access Plan")).Click();
 
-            Assert.That(driver.Url, Is.EqualTo("https://rahulshettyacademy.com/AutomationPractice/#top"));
+            //then switch back to original website
+            driver.SwitchTo().DefaultContent();
         }
 
 
-    }
+
+
+        }
 }
