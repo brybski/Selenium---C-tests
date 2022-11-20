@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
@@ -62,6 +63,30 @@ namespace Selenium_Udemy
             Assert.That(autoSuggestiveResult, Is.EqualTo("Poland"));
         }
 
+        [Test]
+        public void ActionsClassHover()
+        {
+            Actions a = new Actions(driver);
+            IWebElement hover = driver.FindElement(By.XPath("//button[contains(text(),'Hover')]"));
+            a.MoveToElement(hover).Perform();
+            IWebElement Top = driver.FindElement(By.XPath("//div/a[contains(text(),'Top')]"));
+            a.MoveToElement(Top).Click().Perform();
 
+            Assert.That(driver.Url, Is.EqualTo("https://rahulshettyacademy.com/AutomationPractice/#top"));
         }
+
+        [Test]
+        public void ActionsClassDragAndDrop()
+        {
+            Actions a = new Actions(driver);
+            IWebElement hover = driver.FindElement(By.XPath("//button[contains(text(),'Hover')]"));
+            a.MoveToElement(hover).Perform();
+            IWebElement Top = driver.FindElement(By.XPath("//div/a[contains(text(),'Top')]"));
+            a.MoveToElement(Top).Click().Perform();
+
+            Assert.That(driver.Url, Is.EqualTo("https://rahulshettyacademy.com/AutomationPractice/#top"));
+        }
+
+
+    }
 }
