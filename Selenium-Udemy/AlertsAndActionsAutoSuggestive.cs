@@ -1,7 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +29,7 @@ namespace Selenium_Udemy
         [TearDown]
         public void QuitBrowser()
         {
-            driver.Quit();
+            //driver.Quit();
         }
 
         [Test]
@@ -44,6 +47,21 @@ namespace Selenium_Udemy
             Assert.That(alertText, Contains.Substring("Bartek"));
         }
 
+        [Test]
+        public void AutoSuggestiveDropdowns()
+        {
+            //insert Po into input area, then wait until auto suggestive dropdown appears and select Poland
+            driver.FindElement(By.XPath("//input[@id='autocomplete']")).SendKeys("Po");
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//ul[@id='ui-id-1']/li/div[text()='Poland']")));
+            driver.FindElement(By.XPath("//ul[@id='ui-id-1']/li/div[text()='Poland']")).Click();
 
-    }
+
+            //check if dynamic input (.text not work here!) is equal to Poland
+            string autoSuggestiveResult = driver.FindElement(By.XPath("//input[@id='autocomplete']")).GetAttribute("value");
+            Assert.That(autoSuggestiveResult, Is.EqualTo("Poland"));
+        }
+
+
+        }
 }
