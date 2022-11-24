@@ -30,7 +30,7 @@ namespace Selenium_Udemy
         [TearDown]
         public void QuitBrowser()
         {
-            //driver.Quit();
+            driver.Quit();
         }
 
         [Test]
