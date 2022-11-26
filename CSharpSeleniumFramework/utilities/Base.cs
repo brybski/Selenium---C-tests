@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebDriverManager.DriverConfigs.Impl;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Edge;
+using System.Configuration;
 
 namespace CSharpSeleniumFramework.utilities
 {
@@ -17,10 +20,32 @@ namespace CSharpSeleniumFramework.utilities
         [SetUp]
         public void OpeningBrowser()
         {
-            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig()); //WebDriverManager package that helps implementing proper chromedriver for currently installed browser version
-            driver = new ChromeDriver();
+            //Configuration
+            String browserName = ConfigurationManager.AppSettings["browser"];
+            InitBrowser(browserName);
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(url);
+        }
+
+        public void InitBrowser (string browserName)
+        {
+            switch(browserName)
+            {
+                case "Firefox":
+                    new WebDriverManager.DriverManager().SetUpDriver(new FirefoxConfig());
+                    driver = new FirefoxDriver();
+                    break;
+
+                case "Chrome":
+                    new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+                    driver = new ChromeDriver();
+                    break;
+
+                case "Edge":
+                    new WebDriverManager.DriverManager().SetUpDriver(new EdgeConfig());
+                    driver = new EdgeDriver();
+                    break;
+            }
         }
 
         [TearDown]
